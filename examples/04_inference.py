@@ -61,9 +61,9 @@ for prompt in prompts:
             temperature=1.0,
             repetition_penalty=1.1,
             # torch_musa 2.2 的 torch.cat 对负数 dim 有兼容问题，
-            # 新版 DynamicCache 用了 dim=-2，会触发 "Wrong Cat dim" 报错。
-            # 用旧版 cache 实现绕过这个问题。
-            cache_implementation="legacy",
+            # DynamicCache 用了 dim=-2 会触发 "Wrong Cat dim" 报错。
+            # 禁用 KV cache 绕过这个问题（速度略慢，但结果正确）。
+            use_cache=False,
         )
 
     # 只打印新生成的部分
