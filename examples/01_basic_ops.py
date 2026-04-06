@@ -13,7 +13,9 @@
 import torchada  # 放第一行，自动把 cuda 调用映射到 musa
 import torch
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+# 注意：torch.cuda.is_available() 在 MUSA 上故意返回 False
+# 必须用 torchada.is_musa_platform() 来检测 GPU
+device = "cuda" if (torchada.is_musa_platform() or torch.cuda.is_available()) else "cpu"
 print(f"使用设备: {device}  (在 MUSA 服务器上 cuda → musa)\n")
 
 # ── 1. 创建 Tensor ──────────────────────────────────────────
