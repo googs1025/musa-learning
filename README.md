@@ -23,6 +23,8 @@ pip install -r requirements.txt
 > **注意**：`torch` 和 `torch_musa` 在 AutoDL 等摩尔线程镜像中已预装，无需手动安装。
 > `transformers` 需要 < 5.0 版本，因为 5.x 要求 PyTorch >= 2.4，与 torch_musa 2.2 不兼容。
 
+> **可选依赖**：`08_finetune.py` 需要 `pip install peft`。
+
 ## 快速验证
 
 ```bash
@@ -59,6 +61,17 @@ python examples/02_training.py     # 完整训练循环
 python examples/03_amp.py          # 混合精度（AMP）
 python examples/04_inference.py    # HuggingFace 模型推理
 python examples/05_debug_tips.py   # 常见问题与调试技巧
+python examples/06_profiling.py    # torch.profiler 性能分析
+python examples/07_dataloader.py   # DataLoader 多进程与 pin_memory
+python examples/08_finetune.py     # LoRA 微调（需 pip install peft）
+python examples/09_benchmark.py    # MUSA vs CPU 算子基准测试
+torchrun --nproc_per_node=2 examples/10_ddp.py  # 多卡 DDP（单卡用 nproc_per_node=1）
+```
+
+一键运行全部示例（DDP 除外）：
+
+```bash
+bash run_all.sh
 ```
 
 ## 核心用法
