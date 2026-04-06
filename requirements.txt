@@ -1,4 +1,4 @@
-torch
 torchada
-transformers
+# transformers 5.x 要求 PyTorch >= 2.4，与 torch_musa 2.2 不兼容，固定在 4.x
+transformers>=4.40.0,<5.0
 accelerate
